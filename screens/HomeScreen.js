@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  AsyncStorage,
   Image,
   Platform,
   ScrollView,
@@ -51,6 +52,12 @@ export default class HomeScreen extends React.Component {
               <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
             </TouchableOpacity>
           </View>
+
+          <View style={styles.logoutContainer}>
+            <TouchableOpacity onPress={this._handleLogoutPress} style={styles.logoutLink}>
+              <Text style={styles.logoutLinkText}>ログアウト</Text>
+            </TouchableOpacity>
+          </View>
         </ScrollView>
 
         <View style={styles.tabBarInfoContainer}>
@@ -95,6 +102,11 @@ export default class HomeScreen extends React.Component {
     WebBrowser.openBrowserAsync(
       'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
     );
+  };
+
+  _handleLogoutPress = async () => {
+    await AsyncStorage.removeItem('userToken');
+    this.props.navigation.navigate('Auth');
   };
 }
 
@@ -182,6 +194,17 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
   helpLinkText: {
+    fontSize: 14,
+    color: '#2e78b7',
+  },
+  logoutContainer: {
+    marginTop: 15,
+    alignItems: 'center',
+  },
+  logoutLink: {
+    paddingVertical: 15,
+  },
+  logoutLinkText: {
     fontSize: 14,
     color: '#2e78b7',
   },
