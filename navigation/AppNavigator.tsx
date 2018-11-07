@@ -8,7 +8,7 @@ import {
   NavigationScreenConfigProps,
   NavigationScreenProp,
   NavigationRoute,
-  Options, NavigationBottomTabScreenOptions,
+  NavigationBottomTabScreenOptions,
 } from 'react-navigation';
 import { Text } from 'react-native';
 import Screens from '../screens';
