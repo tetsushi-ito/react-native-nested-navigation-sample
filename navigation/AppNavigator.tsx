@@ -1,6 +1,16 @@
 import React from 'react';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 // @ts-ignore
-import { createSwitchNavigator, createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import {
+  createSwitchNavigator,
+  createStackNavigator,
+  createBottomTabNavigator,
+  NavigationScreenConfigProps,
+  NavigationScreenProp,
+  NavigationRoute,
+  Options, NavigationBottomTabScreenOptions,
+} from 'react-navigation';
+import { Text } from 'react-native';
 import Screens from '../screens';
 
 export default createSwitchNavigator(
@@ -37,6 +47,46 @@ export default createSwitchNavigator(
               },
             },
           }),
+        },
+        {
+          navigationOptions: (param: NavigationScreenConfigProps & {
+            navigationOptions: NavigationScreenProp<NavigationRoute>;
+          }): NavigationBottomTabScreenOptions => {
+            return {
+              tabBarIcon: (options: { tintColor: string | null; focused: boolean; horizontal: boolean }): React.ReactElement<any> | null => {
+                const routeName = param.navigation.state.routeName;
+                let iconName: string;
+                if (routeName === 'Home') {
+                  iconName = `ios-information-circle${options.focused ? '' : '-outline'}`;
+                } else if (routeName === 'Notification') {
+                  iconName = `ios-options`;
+                } else {
+                  iconName = '';
+                }
+
+                const tintColor = options.tintColor || undefined;
+
+                // You can return any component that you like here! We usually use an
+                // icon component from react-native-vector-icons
+                return <Ionicons name={iconName} size={options.horizontal ? 20 : 25} color={tintColor} />;
+              },
+              tabBarLabel: (options: { tintColor: string | null; focused: boolean }): React.ReactElement<any> | null => {
+                const routeName = param.navigation.state.routeName;
+                let label = '';
+                if (routeName === 'Home') {
+                  label = 'ホーム';
+                } else if (routeName === 'Notification') {
+                  label = '通知';
+                }
+
+                const tintColor = options.tintColor || undefined;
+
+                // You can return any component that you like here! We usually use an
+                // icon component from react-native-vector-icons
+                return <Text>{label}</Text>;
+              },
+            };
+          },
         },
       ),
     }),
