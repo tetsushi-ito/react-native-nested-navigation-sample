@@ -1,13 +1,25 @@
 import React from 'react';
+// @ts-ignore
 import { createSwitchNavigator, createStackNavigator, createBottomTabNavigator, NavigationActions } from 'react-navigation';
-import { StyleSheet, Text, View } from "react-native";
+import {StyleSheet, Text, TextStyle, View} from 'react-native';
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
+
+// @ts-ignore
+class LoginScreen extends React.Component {
+  render() {
+    return (
+      <View>
+        <Text>ログイン画面1</Text>
+      </View>
+    );
+  }
+}
 
 class TestScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.mainHeaderText}>テストスクリーン</Text>
+        <Text style={styles.mainHeaderText as TextStyle}>テストスクリーン</Text>
       </View>
     );
   }
@@ -26,16 +38,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   }
 });
-
-class LoginScreen extends React.Component {
-  render() {
-    return (
-      <View>
-        <Text>ログイン画面</Text>
-      </View>
-    );
-  }
-}
 
 export default createSwitchNavigator(
   {
