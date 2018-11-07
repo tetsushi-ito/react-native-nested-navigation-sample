@@ -2,6 +2,8 @@ import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
+import NavigationService from './navigation/NavigationService';
+import { NavigationActions } from 'react-navigation';
 
 export default class App extends React.Component {
   state = {
@@ -21,7 +23,11 @@ export default class App extends React.Component {
       return (
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <AppNavigator />
+          <AppNavigator
+            ref={navigatorRef => {
+              NavigationService.setTopLevelNavigator(navigatorRef);
+            }}
+          />
         </View>
       );
     }
@@ -51,6 +57,18 @@ export default class App extends React.Component {
 
   _handleFinishLoading = () => {
     this.setState({ isLoadingComplete: true });
+
+    setTimeout(() => {
+      NavigationService.navigate('Closed', {},
+        NavigationActions.navigate({
+            routeName: 'Main',
+            action: NavigationActions.navigate({
+              routeName: 'Notification',
+            })
+          },
+        )
+      );
+    }, 3000);
   };
 }
 
