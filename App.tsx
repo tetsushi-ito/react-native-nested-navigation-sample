@@ -57,18 +57,6 @@ export default class App extends React.Component {
 
   _handleFinishLoading = () => {
     this.setState({ isLoadingComplete: true });
-
-    setTimeout(() => {
-      NavigationService.dispatch(NavigationActions.navigate({
-        routeName: 'Closed',
-        action: NavigationActions.navigate({
-          routeName: 'Main',
-          action: NavigationActions.navigate({
-            routeName: 'Notification',
-          }),
-        }),
-      }));
-    }, 6000);
   };
 }
 
