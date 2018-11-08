@@ -1,6 +1,6 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { AppLoading, Asset, Font } from 'expo';
+import { AppLoading, Asset } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 import NavigationService from './navigation/NavigationService';
 
